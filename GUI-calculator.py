@@ -1,40 +1,68 @@
-# GUI-calculator.py
+#GUI-calculator.py
 
-from tkinter import *
-from tkinter import ttk, messagebox
+#นำเข้าโมดูลทั้งหมดจาก tkinter ซึ่งเป็นไลบรารีที่ใช้สร้าง GUI ใน Python
+#from tkinter import *
 
+#นำเข้า ttk สำหรับการใช้งาน widgets ที่สวยงามขึ้นและ messagebox สำหรับการแสดงข้อความเตือนหรือข้อมูลต่างๆ
+#from tkinter import ttk,messagebox
 
+#สร้างหน้าต่างหลักของโปรแกรม (main window) โดยใช้คลาส Tk จาก tkinter
+#GUI = Tk() #ทีตัวใหญ่ เคตัวเล็ก
 
-GUI = Tk() #ทีตัวใหญ่ เคตัวเล็ก
-GUI.title('โปรแกรมคำนวณราคาปลา รถพุ่มพวงของลุง')
-GUI.geometry('700x600')
+#กำหนดชื่อของหน้าต่างหลักตามต้องการ เช่น 'โปรแกรมคำนวณราคาทุเรียน'
+#GUI.title('โปรแกรมคำนวณราคาทุเรียน')
 
-bg = PhotoImage(file='car.png')
-# bg = PhotoImage(file= r'C:\Users\Uncle Engineer\Desktop\Basic Python\car.png')
+#กำหนดขนาดของหน้าต่างหลักตามต้องการ เช่น 700 พิกเซล (กว้าง) และ 600 พิกเซล (สูง)
+#GUI.geometry('700x600')
 
-BG = Label(GUI, image=bg)
-BG.pack()
+#โหลดรูปภาพจากไฟล์ car.png และเก็บในตัวแปร bg
+#bg = PhotoImage(file='car.png')
 
-L = Label(GUI,text='กรุณากรอกจำนวนปลา (กิโลกรัม)',font=(None,20))
-L.pack()
+#สร้าง Label เพื่อแสดงภาพพื้นหลังจากไฟล์ที่โหลด
+#BG = Label(GUI, image=bg)
+#แสดง Label ที่มีภาพพื้นหลังในหน้าต่าง
+#BG.pack()
 
-v_quantity = StringVar() # เป็นตัวแปรที่ใช้เก็บข้อความเมื่อพิมพ์เสร็จแล้ว
-E1 = ttk.Entry(GUI, textvariable=v_quantity, font=(None,20))
-E1.pack()
+#สร้าง Label ที่แสดงข้อความ "กรุณากรอกน้ำหนัก" กำหนดฟอนต์และขนาดตัวอักษรเป็น 20
+#L = Label(GUI,text='กรุณากรอกน้ำหนัก',font=(None,20))
+#แสดง Label ที่มีข้อความในหน้าต่าง
+#L.pack()
 
-def Cal():
-	try:
-		quan = float(v_quantity.get())
-		calc = quan * 39 # 39 บาทต่อกิโล * จำนวนปลาที่กรอกมา
-		messagebox.showinfo('ราคาทั้งหมด','ราคาปลาทั้งหมด {} บาท'.format(calc) )
-		v_quantity.set('')
-		E1.focus()
-	except:
-		messagebox.showwarning('กรอกผิด','กรุณากรอกเฉพาะตัวเลขเท่านั้น')
-		v_quantity.set('1')
-		E1.focus()
+#สร้างตัวแปร v_quantity ซึ่งเป็น StringVar ที่ใช้ในการเก็บข้อมูลจากช่องกรอกข้อความ (Entry widget)
+#v_quantity = StringVar() #ตัวแปลที่ใช้เก็บข้อความเมื่อพิมพ์เสร็จแล้ว
 
-B = ttk.Button(GUI, text='คำนวณ',command=Cal)
-B.pack(ipadx=30,ipady=20,pady=20) #ipadx ขยายความกว้าง x/y
+#สร้างช่องกรอกข้อความ (Entry widget) ที่ใช้ v_quantity เป็นตัวแปรในการเก็บข้อมูลที่ผู้ใช้กรอก
+#E1 = ttk.Entry(GUI, textvariable=v_quantity, font=(None,20))
+#แสดงช่องกรอกข้อความในหน้าต่าง
+#E1.pack()
 
-GUI.mainloop() # เพื่อให้โปรแกรมรันตลอดเวลา
+#สร้างฟังก์ชัน Cal ที่จะทำการคำนวณราคาทุเรียนเมื่อผู้ใช้คลิกปุ่มคำนวณ
+#def Cal():
+    #เริ่มการใช้ try เพื่อจับข้อผิดพลาดที่อาจเกิดขึ้นในภายในบล็อกนี้
+    #try:
+        #รับข้อมูลจาก v_quantity ซึ่งเป็นข้อความที่ผู้ใช้กรอก และแปลงเป็นตัวเลข (float)
+        #quan = float(v_quantity.get())
+        #คำนวณราคาทุเรียนโดยการคูณน้ำหนัก (quan) ด้วยราคา 39 บาทต่อกิโลกรัม
+        #calc = quan * 39
+        #แสดงกล่องข้อความแจ้งเตือนที่แสดงราคาที่คำนวณได้
+        #messagebox.showinfo('ราคาทั้งหมด','ราคาทุเรียนทั้งหมด {} บาท'.format(calc))
+        #รีเซ็ตช่องกรอกข้อความให้เป็นค่าว่างหลังจากคำนวณเสร็จ
+        #v_quantity.set('')
+        #ตั้งค่า focus ให้กับช่องกรอกข้อความ (ทำให้เคอร์เซอร์อยู่ในช่องนี้พร้อมให้กรอกข้อมูลต่อไป)
+        #E1.focus()
+    #ถ้ามีข้อผิดพลาดในบล็อก try (เช่นกรอกข้อมูลไม่ใช่ตัวเลข) จะไปที่บล็อก except
+    #except:
+        #แสดงกล่องข้อความเตือนเมื่อผู้ใช้กรอกข้อมูลไม่ถูกต้อง
+        #messagebox.showwarning('กรอกผิด','กรอกตัวเลขเท่านั้น')
+        #รีเซ็ตช่องกรอกข้อความให้มีค่าเป็น "1" เพื่อให้ผู้ใช้กรอกข้อมูลใหม่
+        #v_quantity.set('1')
+        #ตั้งค่า focus ให้กับช่องกรอกข้อความ (ทำให้เคอร์เซอร์อยู่ในช่องนี้)
+        #E1.focus()
+
+#สร้างปุ่มที่เมื่อคลิกแล้วจะเรียกใช้ฟังก์ชัน Cal
+#B = ttk.Button(GUI, text='คำนวณ',command=Cal)
+#แสดงปุ่มบนหน้าต่างและกำหนดขนาดของปุ่ม (เพิ่ม padding ในแนวนอนและแนวตั้ง)
+#B.pack(ipadx=30,ipady=20) #ipadx ขยายความกว้าง x/y
+
+#ทำให้หน้าต่างหลักของโปรแกรมแสดงและทำงานจนกว่าจะปิด
+#GUI.mainloop() # เพื่อให้โปรแกรมรันตลอดเวลา
